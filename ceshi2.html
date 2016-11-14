@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex,follow">
+	<title>天津贵金属交易所</title>
+	
+    <link rel="Shortcut Icon" href="http://www.tjpme.com/data/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="http://www.tjpme.com/data/css/jquery.datetimepicker.css" media="screen">
+	<link rel="stylesheet" href="http://www.tjpme.com/data/css/css_tan.css" media="screen">
+	<link href="http://www.tjpme.com/data/css/pe-icon-7-stroke.css" rel="stylesheet" />
+	<link href="http://www.tjpme.com/data/css/helper.css" rel="stylesheet" />
+	<link href="http://www.tjpme.com/data/css/tjpme_banner.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://www.tjpme.com/data/js/jquery.js"></script>
+	<script type="text/javascript" src="http://www.tjpme.com/data/js/jquery.datetimepicker.js"></script>
+	<!--<script type="text/javascript" src="http://www.tjpme.com/data/js/DD_belatedPNG_0.0.8a.js"></script>-->
+	<script type="text/javascript" src="http://www.tjpme.com/data/js/main.js"></script>
+	<script type="text/javascript" src="http://www.tjpme.com/data/js/index.js"></script>
+	<script type="text/javascript" src="http://www.tjpme.com/data/js/common.js"></script>
+<script type="text/javascript">
+function tabFlash(id)
+{
+	$("#myTab").find("li").each(function(){
+		var thisid = this.id;
+		if (thisid == id+'_li')
+		{
+			$(this).attr("class","active");
+		}
+		else
+		{
+			$(this).attr("class","normal");
+		}
+	});
+	var flashname = id;
+	var timestamp=new Date().getTime();
+	$('#flshdis_left').html('<iframe id="' + flashname + '_left" src="http://219.146.70.13:9088/hqweb/KLS" width="1500" height="320" frameborder="0" scrolling="no" ></iframe>');
+	//$('#flshdis_right').html('<iframe id="' + flashname + '_right" src="http://www.tjpme.com/flash/' + flashname + '2.html?d='+timestamp+'" width="465" height="220" frameborder="0" scrolling="no" ></iframe>');
+	
+}	
+//显示flash之上的文字
+function gettimebuy()
+{
+	var myDate=new Date();
+	//alert(11212);
+	var url="http://www.tjpme.com/flash/transactiondata.php?rand="+myDate.getTime();
+	//alert(url);
+	$.ajax({
+		   type: "POST",
+		   url: url,
+		   dataType:'json',
+		   success: function(datas){
+			if(datas!='')
+			{
+				//console.log(datas.all);
+				$("#timebuy").remove();
+				$("#timebuys").append(datas.all);
+				$("#timebuy tr:even").css("background","#f3f3f3");
+				//console.log(datas.sliver);  
+				$("#sliver_left").contents().find("#sliver1").html('分时线 ' + datas.sliver); 
+				$("#sliver_right").contents().find("#sliver2").html('日K线 ' + datas.sliver); 
+				$("#palladium_left").contents().find("#palladium1").html('分时线 ' + datas.palladium); 
+				$("#palladium_right").contents().find("#palladium2").html('日K线 ' + datas.palladium); 
+				$("#platinum_left").contents().find("#platinum1").html('分时线 ' + datas.platinum);
+				$("#platinum_right").contents().find("#platinum2").html('日K线 ' + datas.platinum); 
+				$("#ni_left").contents().find("#ni1").html('分时线 ' + datas.ni); 
+				$("#ni_right").contents().find("#ni2").html('日K线 ' + datas.ni); 
+				$("#cu_left").contents().find("#cu1").html('分时线 ' + datas.cu); 
+				$("#cu_right").contents().find("#cu2").html('日K线 ' + datas.cu);
+				$("#al_left").contents().find("#al1").html('分时线 ' + datas.al); 
+				$("#al_right").contents().find("#al2").html('日K线 ' + datas.al);
+				
+				$("#sliver_left").contents().find("#sliver1").css("font-family","Microsoft YaHei");  
+				$("#sliver_right").contents().find("#sliver2").css("font-family","Microsoft YaHei"); 
+				$("#palladium_left").contents().find("#palladium1").css("font-family","Microsoft YaHei");  
+				$("#palladium_right").contents().find("#palladium2").css("font-family","Microsoft YaHei");  
+				$("#platinum_left").contents().find("#platinum1").css("font-family","Microsoft YaHei"); 
+				$("#platinum_right").contents().find("#platinum2").css("font-family","Microsoft YaHei");  
+				$("#ni_left").contents().find("#ni1").css("font-family","Microsoft YaHei"); 
+				$("#ni_right").contents().find("#ni2").css("font-family","Microsoft YaHei");  
+				$("#cu_left").contents().find("#cu1").css("font-family","Microsoft YaHei"); 
+				$("#cu_right").contents().find("#cu2").css("font-family","Microsoft YaHei"); 
+				$("#al_left").contents().find("#al1").css("font-family","Microsoft YaHei");  
+				$("#al_right").contents().find("#al2").css("font-family","Microsoft YaHei"); 
+			}
+		   }
+		});
+	
+}
+</script>
+</head>
+<body>
+<div class="head_cs">
+	<iframe class="header_cs" name="header" src="http://www.tjpme.com/header.html" marginheight="0px" seamless="seamless" scrolling="no" frameborder="none"></iframe>
+</div>
+<div class="menu_bg">
+	<ul id="menu_nav" class="menu">
+	</ul> <!-- end .menu -->	
+</div>
+<div class="nav_width">
+	<div class="s_banner">
+		<div class="banner_index">
+		  <a href="javascript:void(0);" class="btn btnPre" id="banner_index_pre"></a>
+		  <a href="javascript:void(0);" class="btn btnNext" id="banner_index_next"></a>
+		    <ul class="banner_wrap" id="banner_index">
+		      
+		    </ul>
+		  <div class="indexBanner_num" id="index_numIco"></div>
+		</div>
+		<script type="text/javascript">
+		//var ShowPre1 = new ShowPre({box:"banner_index",numIco:"index_numIco",loop:1,auto:1});
+		</script>
+	</div><!-- 滚动图片-->
+	<div class="width_tan"><!-- 延时行情 -->
+		<div class="yan_s"></div>
+		<div class="width_tan">
+			<style type="text/css">
+			<!--
+			.nTab{width:1014px;margin:0px auto;background:#fff;border:0px solid #333;overflow:hidden;float:left;}
+			.none {display:none;}
+			.nTab .TabTitle li{float:left;cursor:pointer;height:31px;line-height:31px;font-size:14px;text-align:center;width:auto;background:none;padding: 0px 20px;}
+			.nTab .TabTitle li a{text-decoration:none;}
+			.nTab .TabTitle .active{background:#f4b220;color:#800e04;border:none;margin:0;}
+			.nTab .TabTitle .normal{color:#fff;}
+			.nTab .TabContent{clear:both;overflow:hidden;padding-top:0px;display:block}
+			.TabTitle ul{height:31px;width:100%;background:#54627d;}
+			-->
+			</style>
+			
+			<div class="nTab">
+				<div class="TabTitle">
+					<ul id="myTab">
+						<li class="active" id="platinum_li" onclick="tabFlash('platinum');">现货铂金</li>     
+						<li class="normal" id="palladium_li"  onclick="tabFlash('palladium');">现货钯金</li> 
+						<li class="normal" id="sliver_li" onclick="tabFlash('sliver');">现货白银</li>
+						<li class="normal" id="ni_li"  onclick="tabFlash('ni');">现货镍</li>
+						<li class="normal" id="cu_li"  onclick="tabFlash('cu');">现货铜</li>
+						<li class="normal" id="al_li"  onclick="tabFlash('al');">现货铝</li>
+					</ul>
+				</div>
+				<div class="TabContent">
+					<div class="huangjin1">
+						<div class="huangjin1_conter" id="flshdis_left" style="display:inline;float: left;">
+							
+						</div>
+						<div class="huangjin1_conter"  id="flshdis_right" style="display:inline;float: right;">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="width_tan mar">
+		<div class="yan_left">
+			<div class="left_g">
+				<div class="jiao_y"></div>
+				<div class="width_tan">
+					<table width="350" border="0" cellspacing="0" cellpadding="0" class="table1" id="timebuys">
+					  <thead>
+					  <tr style="background:#54627d;">
+					    <td width="24%">商品名称</td>
+					    <td width="19%">最新价</td>
+					    <td width="19%">涨跌</td>
+					    <td width="19%">最高价</td>
+					    <td width="19%">最低价</td>
+					  </tr>
+					  </thead>
+					  <tbody id="timebuy">
+					  <tr style="background:#f3f3f3;">
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr style="background:#f3f3f3;">
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr style="background:#f3f3f3;">
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  <tr>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					    <td>&nbsp;</td>
+					  </tr>
+					  </tbody>
+					</table>
+				</div>
+			</div><!-- 交易数据 -->
+			
+			<div class="right_x">
+				<div class="back_ril"></div>
+				<div class="rili">
+					<input type="text" id="datetimepicker" style="display:none;"/>
+				</div>
+			</div><!-- 交易日历 -->
+		</div>
+		
+		<div class="jiao_right jiao_fw">
+			<a href="/channel.html?id=320" target="_blank"><span class="icon set_1"></span><span class="font-icon-name">开户</span></a> 
+			<a href="/channel.html?id=107" target="_blank"><span class="icon set_2"></span><span class="font-icon-name">投资者教育</span></a>
+			<a href="/channel.html?id=332" target="_blank"><span class="icon set_3"></span><span class="font-icon-name">交易</span></a>
+			<a href="/channel.html?id=334" target="_blank"><span class="icon set_4"></span><span class="font-icon-name">清算</span></a>
+			<a href="/news_show.html?id=3147" target="_blank"><span class="icon set_5"></span><span class="font-icon-name">会员列表</span></a>
+			<a href="/channel.html?id=338" target="_blank"><span class="icon set_6"></span><span class="font-icon-name">交收</span></a>
+		</div><!-- 交易所服务 -->
+		
+		<div class="clear"></div>
+	</div>	
+	
+	<div class="guan2" id="home_ad_div">
+		<a href="http://mall.tjpme.com?hmsr=tjpme&hmmd=tjpme&hmpl=normal-tjpme&hmkw=&hmci" target="_blank" style="display:block;"><img id="home_ad" src="http://www.tjpme.com/data/images/mall.gif" /></a>
+	</div><!-- 广告2 -->
+	
+	<div class="width_tan">
+		<div class="yan_left">
+			<div class="left_g">
+				<div class="back_bj"><a href="newsclass.html?classid=14" target="_blank" id="more"></a></div>
+				<div class="width_tan">
+					<ul class="lin_k"></ul>
+					<ul class="lin_h lin_ht"></ul>
+					
+				</div>
+			</div><!-- 交易所公告 -->
+			
+			<div class="right_x">
+				<div class="back_xw"><a href="newsclass.html?classid=12" target="_blank" id="more"></a></div>
+				
+				<div class="xin_wen">
+				</div>
+				<div class="clear"></div>
+				<div class="xin_w">
+					<ul class="lin_t"></ul>
+					<ul class="lin_z lin_ht"></ul>
+				</div>
+			</div><!-- 交易所新闻 -->
+		</div>
+		
+		<div class="x_yd">
+			<div class="hy"><a href="newsclass.html?classid=148" target="_blank" id="more"></a></div><!-- 行业动态 -->
+		</div>
+		
+	</div>
+	
+	<div class="clear"></div>
+</div>
+
+
+<div class="nav_width pad">
+		<div class="yan_left">
+			<div class="back_fz"></div>
+			<ul class="fz_zl">
+				<li><a href="http://www.bankcomm.com/BankCommSite/default.shtml" target="_blank"><img src="http://www.tjpme.com/data/images/11y.jpg" width="111" height="34" class="border_img"></a></li><!-- 交通-->
+				<li><a href="http://www.cebbank.com/Site/ceb/cn" target="_blank"><img src="http://www.tjpme.com/data/images/guan_d.jpg" width="111" height="34" class="border_img"></a></li><!-- 光大-->
+				<li><a href="http://www.abchina.com/cn/" target="_blank"><img src="http://www.tjpme.com/data/images/1y.jpg" width="111" height="34" class="border_img"></a></li><!--农业 -->
+				<li><a href="http://bank.ecitic.com/" target="_blank"><img src="http://www.tjpme.com/data/images/8y.jpg" width="111" height="34" class="border_img"></a></li><!--中信-->
+				<li><a href="http://www.icbc.com.cn/icbc/" target="_blank"><img src="http://www.tjpme.com/data/images/6y.jpg" width="111" height="34" class="border_img"></a></li><!--工商 -->
+				<li><a href="http://www.ccb.com/cn/home/index.html" target="_blank"><img src="http://www.tjpme.com/data/images/2y.jpg" width="111" height="34" class="border_img"></a></li><!--建设 -->
+				<li><a href="http://www.hxb.com.cn/home/cn/" target="_blank"><img src="http://www.tjpme.com/data/images/5y.jpg" width="111" height="34" class="border_img"></a></li><!-- 华夏-->
+				<li><a href="http://www.cmbchina.com/" target="_blank"><img src="http://www.tjpme.com/data/images/4y.jpg" width="111" height="34" class="border_img"></a></li><!--招商 -->
+				<li><a href="http://www.spdb.com.cn/chpage/c1/" target="_blank"><img src="http://www.tjpme.com/data/images/9y.jpg" width="111" height="34" class="border_img"></a></li><!-- 浦发--> 
+				<li><a href="http://www.cib.com.cn/cn/index.html" target="_blank"><img src="http://www.tjpme.com/data/images/xingye.jpg" width="111" height="34" class="border_img"></a></li><!-- 兴业 --> 
+				<li><a href="http://www.czbank.com/" target="_blank"><img src="http://www.tjpme.com/data/images/zheshang.jpg" width="111" height="34" class="border_img"></a></li><!-- 浙商 --> 
+				<!--<li><a href="http://www.boc.cn/" target="_blank"><img src="/data/images/3y.jpg" width="111" height="34" class="border_img"/></a></li>中国 -->
+				<!--<li><a href="http://www.cmbc.com.cn/" target="_blank"><img src="/data/images/7y.jpg" width="111" height="34" class="border_img"/></a></li>民生 -->
+				<!--<li><a href="http://www.bank-of-tianjin.com.cn/" target="_blank"><img src="/data/images/10y.jpg" width="111" height="34" class="border_img"/></a></li> 天津-->
+			</ul>
+			
+		</div>
+		<div class="jiao_right">
+			<img style="margin-top:13px;" src="http://www.tjpme.com/data/images/telephone.jpg" width="264" height="77" boder="0">
+		</div>
+</div>
+
+
+<div class="fottle_cs">
+	<iframe src="http://www.tjpme.com/footer.html" name="footer" marginheight="0px" seamless="seamless" scrolling="no" frameborder="none" class="footer_cs"></iframe>
+</div>
+	
+<style>
+	*html{background-image:url(about:blank);background-attachment:fixed;}/*解决IE6下滚动抖动的问题*/
+/*解决IE6下不兼容 position:fixed 的问题*/
+	.float0831 { position:fixed;cursor:pointer;TOP: 190px;RIGHT:30px;float: right;height: 345px;width:107px;
+	_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)-205));
+	z-index:9999;
+	}
+	.floatL{POSITION: absolute;WIDTH: 19px;right:0px;TOP:0;}
+	.floatR{display:block;border:1px solid #fbb309;width:105px;height:147px;}
+	.floatT{display:block;border:1px solid #fbb309;margin-bottom: 13px;width:105px;height:147px;}
+	.cn{position: relative;width:105px;height:147px;background:url(http://www.tjpme.com/data/images/wei_1.jpg) no-repeat left;}
+	.cnt{position: relative;width:105px;height:147px;background:url(http://www.tjpme.com/data/images/wei_2.jpg) no-repeat left;}
+</style>
+<DIV id="floatTools" class="float0831">
+  
+  
+  <!-- <DIV id="divFloatToolsView" class="floatT">
+    <DIV class="cn">
+    	<DIV class="floatL" >
+  	<A href="javascript:showhide();" class="btnOpen" ><img src="/data/images/guan_bi.jpg" /></A> 
+  	</DIV>
+    </DIV>
+  </DIV>
+  <DIV id="divFloatToolsViewtan" class="floatR">
+    <DIV class="cnt">
+    	<DIV class="floatL">
+  	<A href="javascript:showhidea();" class="btnOpen" ><img src="/data/images/guan_bi.jpg" /></A> 
+  	</DIV>
+    </DIV>
+  </DIV>
+</DIV>
+
+
+<script language="javascript">
+	function showhide()
+ {
+ 	if($("#divFloatToolsView").css("display")=="none")
+ 	{
+ 		$("#divFloatToolsView").show();
+ 	}
+ 	else
+ 	{
+ 		$("#divFloatToolsView").hide();	
+ 	}
+ 	
+ }
+ function showhidea()
+ {
+ 	if($("#divFloatToolsViewtan").css("display")=="none")
+ 	{
+ 		$("#divFloatToolsViewtan").show();
+ 	}
+ 	else
+ 	{
+ 		$("#divFloatToolsViewtan").hide();	
+ 	}
+ 	
+ }
+</script>-->
+</body>
+</html>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	//tabFlash('platinum');
+	gettimebuy();
+	setInterval(gettimebuy,10000);
+});
+
+</script>
